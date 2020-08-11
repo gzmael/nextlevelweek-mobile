@@ -1,21 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
+/* eslint-disable prefer-const */
+/* eslint-disable camelcase */
+/* eslint-disable react/style-prop-object */
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { AppLoading } from 'expo';
+import { StatusBar } from 'expo-status-bar';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+import {
+  Archivo_400Regular,
+  Archivo_700Bold,
+} from '@expo-google-fonts/archivo';
+import {
+  useFonts,
+  Poppins_400Regular,
+  Poppins_600SemiBold,
+} from '@expo-google-fonts/poppins';
+
+import AppStack from './src/routes/AppStack';
 
 export default function App() {
+  let [fontsLoaded] = useFonts({
+    Archivo_400Regular,
+    Archivo_700Bold,
+    Poppins_400Regular,
+    Poppins_600SemiBold,
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
   return (
-    <View style={styles.container}>
-      <Text>Teste3</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <AppStack />
+      <StatusBar style="light" backgroundColor="#8257e5" />
+    </>
   );
 }
