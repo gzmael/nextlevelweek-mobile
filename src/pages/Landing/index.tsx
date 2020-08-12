@@ -52,7 +52,7 @@ function Landing() {
       <ButtonsContainer>
         <Botao
           style={styles.btnPrimary}
-          onPress={() => handleNavigatePage('TeachersList')}
+          onPress={() => handleNavigatePage('Study')}
         >
           <Image source={studyIcon} />
           <TextBotao>Estudar</TextBotao>
