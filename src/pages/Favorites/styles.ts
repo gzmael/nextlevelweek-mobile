@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 
 export const Container = styled(View)`
   background-color: #8257e5;
@@ -8,4 +8,8 @@ export const Container = styled(View)`
 
 export const Texto = styled(Text)`
   color: #fff;
+`;
+
+export const TeachersList = styled(ScrollView)`
+  margin-top: -40px;
 `;

@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-wrap-multilines */
 import React, { useState } from 'react';
+import { Alert } from 'react-native';
 import { BorderlessButton } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -11,7 +12,6 @@ import api from '../../services/api';
 
 import {
   Container,
-  Texto,
   Input,
   InputBlock,
   InputGroup,
@@ -49,16 +49,22 @@ function TeachersList(): React.ReactElement {
   async function handleFiltersSubmit() {
     loadFavorites();
 
-    const response = await api.get('classes', {
-      params: {
-        subject,
-        week_day: weekDay,
-        time,
-      },
-    });
+    await api
+      .get('class', {
+        params: {
+          subject,
+          week_day: weekDay,
+          time,
+        },
+      })
+      .then(response => {
+        setTeachers(response.data);
+      })
+      .catch(err => {
+        Alert.alert('Erro', 'Erro ao filtrar');
+      });
 
     setIsFiltersVisible(false);
-    setTeachers(response.data);
   }
 
   return (

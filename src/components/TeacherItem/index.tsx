@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Image, Linking } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import heartOutlineIcon from '../../assets/images/icons/heart-outline.png';
 import unfavoriteIcon from '../../assets/images/icons/unfavorite.png';
@@ -44,8 +45,27 @@ const TeacherItem: React.FC<TeacherProps> = ({
 }: TeacherProps) => {
   const [isFavorited, setIsFavorited] = useState(favorited);
 
-  function handleToggleFavorited() {
-    setIsFavorited(true);
+  async function handleToggleFavorited() {
+    const favorites = await AsyncStorage.getItem('favorites');
+
+    let favoritesArray = [];
+    if (favorites) {
+      favoritesArray = JSON.parse(favorites);
+    }
+
+    if (isFavorited) {
+      const favoriteIndex = favoritesArray.findIndex((teacherItem: Teacher) => {
+        return teacherItem.id === teacher.id;
+      });
+
+      favoritesArray.splice(favoriteIndex, 1);
+      setIsFavorited(false);
+    } else {
+      favoritesArray.push(teacher);
+
+      setIsFavorited(true);
+    }
+    await AsyncStorage.setItem('favorites', JSON.stringify(favoritesArray));
   }
 
   function handleLinkToWhatsApp() {

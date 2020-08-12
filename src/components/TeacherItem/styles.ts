@@ -12,7 +12,7 @@ export const Container = styled(View)`
 `;
 
 export const Profile = styled(View)`
-  flex-direction: 'row';
+  flex-direction: row;
   align-items: center;
   padding: 24px;
 `;
