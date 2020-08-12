@@ -61,7 +61,7 @@ function TeachersList(): React.ReactElement {
         setTeachers(response.data);
       })
       .catch(err => {
-        Alert.alert('Erro', 'Erro ao filtrar');
+        Alert.alert('Erro', `Erro ao Filtrar: ${err}`);
       });
 
     setIsFiltersVisible(false);
